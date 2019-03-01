@@ -1,4 +1,7 @@
 document.addEventListener("click", changeColor);
+
 function changeColor() {  
-  document.body.style.backgroundColor = "blue";
+  if (document.getElementById("color").style.backgroundColor == "red"){
+      document.getElementById("color").style.backgroundColor = "blue"
+ }else document.getElementById("color").style.backgroundColor = "red"
 }
