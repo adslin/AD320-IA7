@@ -4,47 +4,57 @@ var fs = require("fs");
 var data = fs.readFileSync("./colors.json");
 var jsonFormat = JSON.parse(data);
 
+
 router.get('/all', (req, res, next) => {
-    res.send(jsonFormat.colors);
+    res.send(jsonFormat);
 });
 
 router.get('/:color', (req, res, next) => {
-                
+
     for (var color in jsonFormat.colors) {
         if(jsonFormat.colors[color].color == req.params.color.toLowerCase()) {
-        res.send(jsonFormat.colors[color]);
-        } 
-    }; 
+        return res.send(jsonFormat.colors[color]);
+    } 
+
+        (err) => {
+            console.log(err);
+            res.sendStatus(500);
+            return;
+        }
+}; 
 
         switch (color) {
 
             case 'black':
-                res.send(colors.colors[0])
+                res.send(jsonFormat[0])
                 break;
 
             case 'white':
-                res.send(colors.colors[1])
+                res.send(jsonFormat[1])
                 break;
 
             case 'red':
-                res.send(colors.colors[2])
+                res.send(jsonFormat[2])
                 break;
 
             case 'blue':                        
-                res.send(colors.colors[3])
+                res.send(jsonFormat[3])
                 break;
 
             case 'yellow':
-                res.send(colors.colors[4])
+                res.send(jsonFormat[4])
                 break;
 
             case 'green':
-                res.json(colors.colors[5])
+                res.json(jsonFormat[5])
                 break;
             
             default:
-                return res.send({ error: true, message: 'Colors App' })
-
+                res.send('Not Found');
+                break;
+                
             }
-        })        
+
+        }) 
+
 module.exports = router;
